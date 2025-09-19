@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zubair's Portfolio</title>
+  <link rel="icon" type="image/png" href="/icons/favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="stars-container">
+      <div class="stars"></div>
+      <div class="stars2"></div>
+      <div class="stars3"></div>
+    </div>
+    
+    <div class="galaxy">
+      <div class="core"></div>
+      <div class="spiral-arm"></div>
+      <div class="spiral-arm reverse"></div>
+    </div>
+    
+    <div class="satellite">
+      <div class="sat-body"></div>
+      <div class="sat-dish"></div>
+      <div class="sat-panel"></div>
+    </div>
+    
+    <div class="loading-content">
+      <h2 class="loading-text">🚀 Preparing for Launch</h2>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <p class="loading-subtext">Loading cosmic components...</p>
+    </div>
+  </div>
+
+  <!-- React mounts here -->
+  <div id="root"></div>
+
+  <style>
+    body { 
+      margin: 0; 
+      background: #0f0f1f; 
+      overflow: hidden; 
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Loader wrapper */
+    #loader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to bottom, #0f0f1f 0%, #1a1035 100%);
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    /* Enhanced stars with multiple layers */
+    .stars-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    .stars, .stars2, .stars3 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+    }
+    
+    .stars::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 
+        50px 80px white, 120px 200px white, 300px 150px white,
+        500px 300px white, 700px 400px white, 900px 100px white,
+        250px 50px white, 400px 600px white, 600px 500px white,
+        800px 350px white, 1000px 250px white, 1100px 700px white,
+        1300px 450px white, 1400px 550px white, 1500px 150px white,
+        1600px 400px white, 1700px 300px white, 1800px 600px white;
+      animation: moveStars 60s linear infinite, twinkle 3s infinite alternate;
+    }
+    
+    .stars2::after {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      box-shadow: 
+        80px 120px white, 160px 250px white, 350px 180px white,
+        550px 350px white, 750px 450px white, 950px 150px white,
+        300px 80px white, 450px 650px white, 650px 550px white,
+        850px 400px white, 1050px 300px white, 1150px 750px white,
+        1350px 500px white, 1450px 600px white, 1550px 200px white,
+        1650px 450px white, 1750px 350px white, 1850px 650px white;
+      animation: moveStars2 80s linear infinite, twinkle 4s infinite alternate;
+    }
+    
+    .stars3::after {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(200, 200, 255, 0.8);
+      border-radius: 50%;
+      box-shadow: 
+        30px 50px white, 100px 150px white, 250px 120px white,
+        450px 250px white, 650px 350px white, 850px 80px white,
+        200px 30px white, 350px 550px white, 550px 450px white,
+        750px 300px white, 950px 200px white, 1050px 650px white,
+        1250px 400px white, 1350px 500px white, 1450px 100px white,
+        1550px 350px white, 1650px 250px white, 1750px 550px white;
+      animation: moveStars3 100s linear infinite, twinkle 5s infinite alternate;
+    }
+
+    @keyframes moveStars {
+      from { transform: translateX(0) translateY(0); }
+      to { transform: translateX(-2000px) translateY(1000px); }
+    }
+    
+    @keyframes moveStars2 {
+      from { transform: translateX(0) translateY(0); }
+      to { transform: translateX(-1800px) translateY(800px); }
+    }
+    
+    @keyframes moveStars3 {
+      from { transform: translateX(0) translateY(0); }
+      to { transform: translateX(-2200px) translateY(1200px); }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Galaxy animation */
+    .galaxy {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 40px;
+      z-index: 2;
+    }
+    
+    .core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #6b21a8, #3b0764);
+      box-shadow: 0 0 40px rgba(107, 33, 168, 0.8);
+      animation: pulse 4s infinite alternate;
+    }
+    
+    @keyframes pulse {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      100% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+    
+    .spiral-arm {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 180px;
+      height: 180px;
+      border: 2px solid transparent;
+      border-top-color: rgba(139, 92, 246, 0.5);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      animation: rotateSpiral 15s linear infinite;
+    }
+    
+    .spiral-arm.reverse {
+      border-top-color: transparent;
+      border-bottom-color: rgba(126, 34, 206, 0.5);
+      animation: rotateSpiralReverse 12s linear infinite;
+    }
+    
+    @keyframes rotateSpiral {
+      0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+      50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.05); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); }
+    }
+    
+    @keyframes rotateSpiralReverse {
+      0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+      50% { transform: translate(-50%, -50%) rotate(-180deg) scale(1.05); }
+      100% { transform: translate(-50%, -50%) rotate(-360deg) scale(1); }
+    }
+
+    /* Satellite animation */
+    .satellite {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      animation: orbitSatellite 8s linear infinite;
+    }
+    
+    .sat-body {
+      width: 20px;
+      height: 10px;
+      background: #c4b5fd;
+      border-radius: 4px;
+    }
+    
+    .sat-dish {
+      position: absolute;
+      top: -8px;
+      left: 5px;
+      width: 10px;
+      height: 8px;
+      background: #a78bfa;
+      border-radius: 50% 50% 0 0;
+    }
+    
+    .sat-panel {
+      position: absolute;
+      top: 2px;
+      right: -8px;
+      width: 8px;
+      height: 6px;
+      background: #8b5cf6;
+      border-radius: 2px;
+    }
+    
+    @keyframes orbitSatellite {
+      0% { 
+        transform: translate(-50%, -50%) rotate(0deg) translateX(100px) rotate(0deg); 
+      }
+      100% { 
+        transform: translate(-50%, -50%) rotate(360deg) translateX(100px) rotate(-360deg); 
+      }
+    }
+
+    /* Loading text and progress */
+    .loading-content {
+      text-align: center;
+      z-index: 4;
+      margin-top: 40px;
+    }
+    
+    .loading-text {
+      color: #e9d5ff;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(139, 92, 246, 0.7);
+    }
+    
+    .progress-bar {
+      width: 300px;
+      height: 6px;
+      background: rgba(139, 92, 246, 0.2);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 auto 15px;
+    }
+    
+    .progress {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(to right, #8b5cf6, #c4b5fd);
+      border-radius: 3px;
+      animation: loadingProgress 8s ease-in-out infinite;
+    }
+    
+    @keyframes loadingProgress {
+      0% { width: 0%; }
+      50% { width: 80%; }
+      100% { width: 100%; }
+    }
+    
+    .loading-subtext {
+      color: #c4b5fd;
+      font-size: 14px;
+      font-weight: 300;
+      margin: 0;
+      opacity: 0.8;
+    }
+  </style>
+
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
