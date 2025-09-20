@@ -32,11 +32,11 @@ const Contacts = () => {
 
       {/* Email */}
       <a
-        href="mailto:zubair@gmail.com"
+        href="mailto:zubairmustafa1095@gmail.com"
         className="flex items-center gap-3 group"
       >
         <Mail className="text-violet-400 group-hover:text-violet-300 transition" />
-        <span className="group-hover:text-violet-300">zubair@gmail.com</span>
+        <span className="group-hover:text-violet-300">MY_Gmail.com</span>
       </a>
 
       <a

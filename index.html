@@ -15,18 +15,21 @@
       <div class="stars2"></div>
       <div class="stars3"></div>
     </div>
-    
-    <div class="galaxy">
-      <div class="core"></div>
-      <div class="spiral-arm"></div>
-      <div class="spiral-arm reverse"></div>
-    </div>
-    
+<div class="galaxy">
+  <div class="core"></div>
+  <div class="spiral-arm"></div>
+  <div class="spiral-arm reverse"></div>
+
+  <!-- orbit must be inside galaxy -->
+  <div class="orbit">
     <div class="satellite">
       <div class="sat-body"></div>
       <div class="sat-dish"></div>
       <div class="sat-panel"></div>
     </div>
+  </div>
+</div>
+
     
     <div class="loading-content">
       <h2 class="loading-text">🚀 Preparing for Launch</h2>
@@ -208,15 +211,30 @@
     }
 
     /* Satellite animation */
-    .satellite {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 3;
-      animation: orbitSatellite 8s linear infinite;
-    }
-    
+ .orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: orbitRotate 8s linear infinite;
+}
+
+
+.satellite {
+  position: absolute;
+  top: 50%;
+  left: 100%;  /* place it on orbit edge */
+  transform: translate(-50%, -50%);
+}
+
+@keyframes orbitRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
     .sat-body {
       width: 20px;
       height: 10px;
@@ -244,14 +262,14 @@
       border-radius: 2px;
     }
     
-    @keyframes orbitSatellite {
+    /* @keyframes orbitSatellite {
       0% { 
         transform: translate(-50%, -50%) rotate(0deg) translateX(100px) rotate(0deg); 
       }
       100% { 
         transform: translate(-50%, -50%) rotate(360deg) translateX(100px) rotate(-360deg); 
-      }
-    }
+      } */
+    /* } */
 
     /* Loading text and progress */
     .loading-content {

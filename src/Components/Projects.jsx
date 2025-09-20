@@ -56,11 +56,17 @@ const Projects = () => {
               </div>
 
               {/* Button */}
-              {project.available && (
-                <div className="w-full h-auto bg-gradient-to-r cursor-pointer from-indigo-600 to-purple-600 text-white text-center py-2 rounded-2xl font-medium hover:brightness-110 transition">
-                  View More
-                </div>
-              )}
+          {project.available && (
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full h-auto bg-gradient-to-r cursor-pointer from-indigo-600 to-purple-600 text-white text-center py-2 rounded-2xl font-medium hover:brightness-110 transition"
+            >
+              View More
+  </a>
+)}
+
             </TiltCard>
           </AnimatedOnScroll>
         ))}
